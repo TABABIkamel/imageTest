@@ -2,37 +2,27 @@ package com.image.image.service;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-import com.google.auth.Credentials;
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.storage.*;
+
 import com.image.image.entity.Image;
 import com.image.image.repository.FileSystemRepository;
 import com.image.image.repository.ImageDbRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
+
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Map;
-import java.util.UUID;
 
 @Service
 public class FileLocationService {
-    @Autowired
+    @Autowired(required=false)
     FileSystemRepository fileSystemRepository;
-    @Autowired
+    @Autowired(required=false)
     ImageDbRepository imageDbRepository;
 
     public String save(byte[] bytes, String imageName) throws Exception {

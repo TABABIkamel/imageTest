@@ -3,11 +3,9 @@ package com.image.image.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.stereotype.Repository;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 
-import javax.persistence.Lob;
 @Document(collection = "image")
 public class Image {
     @Id
