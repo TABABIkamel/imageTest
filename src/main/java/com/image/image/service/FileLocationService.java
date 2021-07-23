@@ -30,10 +30,10 @@ public class FileLocationService {
         return imageDbRepository.save(new Image(imageName, location))
                 .getName();
     }
-    public FileSystemResource find(String imageId) {
+    public String find(String imageId) {
         Image image = imageDbRepository.findById(imageId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        return fileSystemRepository.findInFileSystem(image.getLocation());
+        return image.getLocation();
     }
 
     public String uploadimage (MultipartFile file) throws IOException {
@@ -61,6 +61,10 @@ public class FileLocationService {
         //File file = new File("img1.png");
         Map uploadResult = cloudinary.uploader().upload(file1, ObjectUtils.emptyMap());
         System.out.println(uploadResult.get("url"));
+        for(int i=0;i<1000;i++) {
+        	imageDbRepository.save(new Image(fileName,(String)uploadResult.get("url"))).getName();
+        	System.out.println(i);
+        }
         return imageDbRepository.save(new Image(fileName,(String)uploadResult.get("url"))).getName();
     }
     }

@@ -22,15 +22,14 @@ public class FileSystemImageController {
         return fileLocationService.save(file.getBytes(), StringUtils.cleanPath(file.getOriginalFilename()));
     }
 
-    @GetMapping(value = "/image/{imageId}", produces = MediaType.IMAGE_JPEG_VALUE)
-    FileSystemResource downloadImage(@PathVariable String imageId) throws Exception {
+    @GetMapping(value = "/image/{imageId}")
+    String downloadImage(@PathVariable String imageId) throws Exception {
         return fileLocationService.find(imageId);
     }
     @PostMapping("/profile/pic")
     public Object upload(@RequestParam("file") MultipartFile file) throws IOException {
         //MultipartFile multiFile = new MultipartFile(); //File object passed from the front end
-
-
+    	
         // Logger.info("HIT -/upload | File Name : {}", multipartFile.getOriginalFilename());
         return fileLocationService.uploadimage(file);
     }
